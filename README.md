@@ -228,3 +228,97 @@ Try re-install
    conda uninstall tokenizers, transformers
    pip install transformers# localgpt
 LocalGPT: Secure, Local Conversations with Your Documents
+Step-by-Step Guide to Setup LocalGPT on Windows PC
+19/11/2023
+/
+
+Blog, Generative AI
+LocalGPT is a free tool that helps you talk privately with your documents. It keeps your information safe on your computer, so you can feel confident when working with your files.
+
+Technically, LocalGPT offers an API that allows you to create applications using Retrieval-Augmented Generation (RAG). Seamlessly integrate LocalGPT into your applications and workflows to elevate the way you interact with documents. LocalGPT works on different systems right from the start, so you can talk to your data using CUDA for GPU, CPU, or MPS (Metal Performance Shaders). Choose the platform that fits your computer setup best.
+
+In terms of document inference, LocalGPT has practical applications in:
+1. Document Summarization:
+
+   – LocalGPT can analyze and summarize lengthy documents, providing concise and coherent summaries. This is valuable for quickly extracting key information from reports, articles, or research papers.
+
+2. Information Retrieval:
+
+   – Users can engage in conversations with LocalGPT to retrieve specific information from documents. It can answer questions, provide insights, and guide users through the content of the documents.
+
+3. Contextual Understanding:
+
+   – LocalGPT excels in understanding the context within documents. It can maintain context over a series of queries, making it useful for users who want to explore or discuss topics within the document.
+
+4. Language Translation Assistance:
+
+   – LocalGPT can assist in translating content within documents, helping users understand or communicate information in different languages.
+
+5. Data Exploration:
+
+   – For datasets stored in document form, LocalGPT can be used to explore and analyze the data. Users can ask questions about the data, seek patterns, or request specific insights.
+
+6. Document-Based Queries:
+
+   – Users can pose queries related to the content of documents, and LocalGPT can provide relevant information or guide users to the sections of the document that address their queries.
+
+7. Research Support:
+
+   – Researchers can leverage LocalGPT for assistance in navigating through research papers, exploring related work, and obtaining contextually relevant information for their studies.
+
+8. Document-Based Conversations:
+
+   – Users can engage in natural language conversations with LocalGPT about the content of documents, enabling a dynamic interaction that goes beyond simple keyword searches.
+
+9. Document Tagging and Categorization:
+
+   – LocalGPT can assist in tagging or categorizing documents based on their content, making it easier for users to organize and manage large sets of documents.
+
+10. Content Extraction:
+
+    – LocalGPT can be used to extract specific details or data points from documents, streamlining the process of information extraction for various purposes.
+
+These applications showcase how LocalGPT can enhance document inference tasks by providing natural language interaction and understanding within the context of the documents.
+
+Setting Up Environment for LocalGPT 
+1. Clone the Repository
+git clone https://github.com/PromtEngineer/localGPT.git
+2. Install Conda and Create a Virtual Environment
+conda create -n localgpt_llama2_gpu python=3.10.0
+conda activate localgpt_llama2_gpu
+3. Install Dependencies
+pip install -r requirements.txt
+Make sure to run this command from inside the localGPT directory.
+
+GPU Configuration for Windows PC
+To install llama-cpp-python with cuBLAS support, execute the following commands:
+
+set CMAKE_ARGS=-DLLAMA_CUBLAS=on FORCE_CMAKE=1
+pip install llama-cpp-python==0.1.83 --no-cache-dir
+Configure CUDA:
+If torch is not using CUDA, follow these steps:
+
+Validate CUDA usage:
+python -c "import torch; print(torch.cuda.is_available())"
+Uninstall torch packages:
+pip uninstall torch torchvision torchaudio
+Reinstall torch with CUDA support:
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+Validate CUDA usage again:
+python -c "import torch; print(torch.cuda.is_available())"
+Running LocalGPT:
+Use Case 1 – Command Line Output:
+Ingest data:
+Run Command: python ingest.py --device_type cuda
+Run LocalGPT Inference:
+Run Command: python run_localGPT.py --device_type cuda
+Use Case 2 – Web UI Output:
+Ingest all files (if not done earlier):
+Run Command: python ingest.py
+Run LocalGPT API:
+Run Command: python run_localGPT_API.py
+Navigate to the LocalGPTUI directory:
+Run Command: cd localGPTUI
+Run the Flask web app:
+Run Command: python localGPTUI.py
+Open a web browser and go to the address http://localhost:5111/
